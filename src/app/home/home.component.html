@@ -1,0 +1,58 @@
+<p>
+	<mat-toolbar color="primary">
+	  <span>Top nomes Brasil (por frequência)</span>
+	</mat-toolbar>
+  </p>
+  
+<div class="spinnerWrapper" *ngIf="!nomes">
+	<mat-spinner class="spinner" ></mat-spinner>
+</div>
+<div class="chartWrapper">
+	<canvas baseChart 
+    [data]="pieChartData" 
+    [labels]="pieChartLabels" 
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend"
+	[colors]="pieChartColors">
+	
+  </canvas>
+  </div>
+  
+  <div class="organizers">
+	<div>
+		<mat-form-field appearance="fill">
+			<mat-label>Sexo</mat-label>
+			<mat-select (selectionChange)="getNomes($event.value)" [(value)]="selected">
+				<mat-option value="TODOS">TODOS</mat-option>
+			  <mat-option *ngFor="let s of sexos" [value]="s.valor">
+				{{s.nome}}
+			  </mat-option>
+			</mat-select>
+		  </mat-form-field>
+	</div>
+	<div >
+		<button mat-icon-button color="primary"(click)="changePage(true)" aria-label="Example icon button with a menu icon">
+			<mat-icon>arrow_back_ios</mat-icon>
+		  </button>
+		<mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color" [value]="idxPaginas">
+			<mat-button-toggle *ngFor="let page of inicioPorPag; let i = index" [value]="i" (change)="setPagesBeingShown(i)">{{i+1}}</mat-button-toggle>
+		  </mat-button-toggle-group>
+		<!--<button *ngFor="let page of inicioPorPag; let i = index" (click)="setPagesBeingShown(i)">{{i+1}}</button>-->
+		<button mat-icon-button color="primary"(click)="changePage(false)" aria-label="Example icon button with a menu icon">
+			<mat-icon>arrow_forward_ios</mat-icon>
+		  </button>
+		</div>
+  </div>
+<mat-list role="list">
+	<div *ngFor="let n of nomes.res | slice:inicioPorPag[idxPaginas]:fimPorPag[idxPaginas]" class="nameList">
+		<mat-card>
+			<mat-card-title>{{n.ranking}} - {{n.nome}} </mat-card-title>
+			<mat-card-subtitle>Frequência: {{n.frequencia}}</mat-card-subtitle>
+</mat-card>
+</div>
+
+  </mat-list>
+  
+  

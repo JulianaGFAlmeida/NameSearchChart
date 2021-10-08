@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.spinner{
+	margin:auto
+}
+.spinnerWrapper{
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+  left: 50%;
+}
+.chartWrapper{
+	margin: auto;
+}
+.organizers{
+	display: flex;
+	width: 90%;
+	margin:auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+@media only screen and (min-width: 800px) {
+	.chartWrapper {
+		width: 50%;
+	}
+	
+  }
+  @media only screen and (max-width: 800px) {
+  .organizers{
+	flex-direction: column;
+	justify-content: center;
+}
+.organizers div{
+	margin:auto;
+}
+  }
